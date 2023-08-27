@@ -1,0 +1,38 @@
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+
+        left = 0
+
+        right = len(matrix) - 1
+
+        row = -1
+
+        while left <= right:
+            mid = (left + right) // 2
+            if target in matrix[mid]:
+                row = mid
+                break
+            elif matrix[mid][0] > target:
+                right = mid - 1
+            else:
+                left = mid + 1
+        
+        left = 0
+
+        right = len(matrix[row]) - 1
+
+        while left <= right:
+            mid = (left + right) // 2
+            if matrix[row][mid] == target:
+                return True
+            elif matrix[row][mid] > target:
+                right = mid - 1
+            else:
+                left = mid + 1
+
+
+
+
+        return False
+
+#O(log(n * k)) rows shrink every iteration then cols shrink every iteration
